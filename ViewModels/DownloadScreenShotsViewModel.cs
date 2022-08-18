@@ -5,25 +5,20 @@ namespace AppFoxScreenShotTerm.ViewModels
 {
     public class DownloadScreenShotsViewModel : ViewModelBase
     {
-        public DateTime dateFrom = DateTime.Now;
+        public DateTimeOffset dateFrom = new DateTimeOffset(DateTime.Now);
 
-        public DateTime DateFrom
+        public DateTimeOffset DateFrom
         {
-            get => (DateTime) dateFrom;
-            private set
-            {
-                this.RaiseAndSetIfChanged(ref dateFrom, (DateTime) value);
-                // Text = dateFrom.ToString();
-                Console.WriteLine(dateFrom.ToString("s"));
-            } 
-        }
+            get => (DateTimeOffset) dateFrom;
+            private set => this.RaiseAndSetIfChanged(ref dateFrom, (DateTimeOffset)value);             
+        }       
 
-        public void DateFromChanged()
+        public DateTimeOffset dateTo = new DateTimeOffset(DateTime.Now);
+        public DateTimeOffset DateTo
         {
-            Console.WriteLine("Hello");
+            get => (DateTimeOffset)dateTo;
+            private set => this.RaiseAndSetIfChanged(ref dateTo, (DateTimeOffset)value);
         }
-
-        public DateTime dateTo = new DateTime();
 
         public string text = "44444444444";
 
