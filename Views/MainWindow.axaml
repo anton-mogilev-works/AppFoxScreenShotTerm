@@ -1,0 +1,44 @@
+<Window xmlns="https://github.com/avaloniaui"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:vm="using:AppFoxScreenShotTerm.ViewModels"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
+        x:Class="AppFoxScreenShotTerm.Views.MainWindow"
+        Icon="/Assets/avalonia-logo.ico"
+        Title="AppFoxScreenShotTerm">
+
+    <Design.DataContext>
+        <vm:MainWindowViewModel/>
+    </Design.DataContext>
+	
+	<Grid ShowGridLines="False">
+		<Grid.RowDefinitions>
+			<RowDefinition Height="Auto"></RowDefinition>
+			<RowDefinition Height="*"></RowDefinition>
+			<RowDefinition Height="*"></RowDefinition>
+		</Grid.RowDefinitions>
+		<Grid.ColumnDefinitions>
+			<ColumnDefinition Width="*"></ColumnDefinition>
+		</Grid.ColumnDefinitions>
+
+		<Border BorderThickness="1" CornerRadius="2" BorderBrush="Black" Padding="1" Margin="2" Grid.Row="0" Grid.Column="0">
+			<Menu>
+				<MenuItem Header="Make screenshot" Command="{Binding MakeScreenshot}" />
+				<MenuItem Header="Upload screenshots" />
+				<MenuItem Header="Get screenshots" />
+			</Menu>		
+		</Border>
+
+		<ScrollViewer Grid.Row="1" Grid.Column="0" Padding="1" Margin="1">
+			<TextBlock Text="{Binding MessageText}" HorizontalAlignment="Left" VerticalAlignment="Top"/>
+
+			<Panel Width="300" Height="300" Grid.Row="2" Grid.Column="0" HorizontalAlignment="Left" VerticalAlignment="Top">
+				<Image Width="100" VerticalAlignment="Top" HorizontalAlignment="Left" Source="D:\projects\AppFoxScreenShotTerm\bin\Debug\net6.0\screenshots\2022_08_18_11_45_09.jpg"   />
+			</Panel>
+		</ScrollViewer>
+
+		
+	</Grid>
+
+</Window>
