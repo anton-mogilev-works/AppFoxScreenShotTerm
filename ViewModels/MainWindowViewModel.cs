@@ -21,13 +21,8 @@ namespace AppFoxScreenShotTerm.ViewModels
         
         public string imageSource = Params.SCREENS_FOLDER + Path.DirectorySeparatorChar + "2022_08_18_11_45_09.jpg";
 
-        public ViewModelBase downloadScreenshotsModel;        
-
-        public MainWindowViewModel()
-        {
-            //ShowScreenshotsList();      
-        }
-
+        // public ViewModelBase downloadScreenshotsModel;
+        
         public void DownloadScreenshots()
         {
 
@@ -54,15 +49,15 @@ namespace AppFoxScreenShotTerm.ViewModels
             var captureBmp = new Bitmap(Params.screenWidth, Params.screenHeight, PixelFormat.Format32bppArgb);
             using var captureGraphic = Graphics.FromImage(captureBmp);
             captureGraphic.CopyFromScreen(0, 0, 0, 0, captureBmp.Size);
-            try
-            {
-                captureBmp.Save(imagePath, ImageFormat.Jpeg);
-                MessageText += imagePath + "\r\n";
-            }
-            catch (Exception e)
-            {
-                Console.WriteLine(e.ToString());
-            }
+            // try
+            // {
+            //     captureBmp.Save(imagePath, ImageFormat.Jpeg);
+            //     MessageText += imagePath + "\r\n";
+            // }
+            // catch (Exception e)
+            // {
+            //     Console.WriteLine(e.ToString());
+            // }
 
             
 

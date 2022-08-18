@@ -5,6 +5,7 @@ using Avalonia.Controls.ApplicationLifetimes;
 using Avalonia.Markup.Xaml;
 using System.IO;
 using AppFoxScreenShotTerm.Helpers;
+using System;
 
 namespace AppFoxScreenShotTerm
 {
@@ -12,9 +13,12 @@ namespace AppFoxScreenShotTerm
     {
         public override void Initialize()
         {
-            if (Directory.Exists(Params.SCREENS_FOLDER) == false)
+            string screenshotsDir = Params.applicationPath + Path.DirectorySeparatorChar + Params.SCREENS_FOLDER;
+            Console.WriteLine(screenshotsDir);
+
+            if (Directory.Exists(screenshotsDir) == false)
             {
-                Directory.CreateDirectory(Params.SCREENS_FOLDER);
+                Directory.CreateDirectory(screenshotsDir);
             }
 
             AvaloniaXamlLoader.Load(this);
