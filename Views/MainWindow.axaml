@@ -24,9 +24,8 @@
 
 		<Border BorderThickness="1" CornerRadius="2" BorderBrush="Black" Padding="1" Margin="2" Grid.Row="0" Grid.Column="0">
 			<Menu>
-				<MenuItem Header="Make screenshot" Command="{Binding MakeScreenshot}" />
-				<MenuItem Header="Upload screenshots" />
-				<MenuItem Header="Get screenshots" />
+				<MenuItem Header="Make screenshot" Command="{Binding MakeScreenshot}" />				
+				<MenuItem Header="Get screenshots" Command="{Binding DownloadScreenshots}" />
 			</Menu>		
 		</Border>
 
@@ -37,6 +36,9 @@
 				<Image Width="100" VerticalAlignment="Top" HorizontalAlignment="Left" Source="D:\projects\AppFoxScreenShotTerm\bin\Debug\net6.0\screenshots\2022_08_18_11_45_09.jpg"   />
 			</Panel>
 			-->
+			
+			<ContentControl Content="{Binding MainPanelViewModel}"/>
+            
 		</ScrollViewer>
 
 		
