@@ -31,11 +31,12 @@
 		</Border>
 
 		<ScrollViewer Grid.Row="1" Grid.Column="0" Padding="1" Margin="1">
-			<TextBlock Text="{Binding MessageText}" HorizontalAlignment="Left" VerticalAlignment="Top"/>
+			<!-- <TextBlock Text="{Binding MessageText}" HorizontalAlignment="Left" VerticalAlignment="Top"/>
 
 			<Panel Width="300" Height="300" Grid.Row="2" Grid.Column="0" HorizontalAlignment="Left" VerticalAlignment="Top">
 				<Image Width="100" VerticalAlignment="Top" HorizontalAlignment="Left" Source="D:\projects\AppFoxScreenShotTerm\bin\Debug\net6.0\screenshots\2022_08_18_11_45_09.jpg"   />
 			</Panel>
+			-->
 		</ScrollViewer>
 
 		
