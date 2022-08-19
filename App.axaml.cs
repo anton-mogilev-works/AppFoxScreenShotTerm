@@ -14,12 +14,18 @@ namespace AppFoxScreenShotTerm
         public override void Initialize()
         {
             string screenshotsDir = Params.applicationPath + Path.DirectorySeparatorChar + Params.SCREENS_FOLDER;
-            Console.WriteLine(screenshotsDir);
+            string downloadDir = Params.applicationPath + Path.DirectorySeparatorChar + Params.DOWNLOAD_FOLDER;
 
             if (Directory.Exists(screenshotsDir) == false)
             {
                 Directory.CreateDirectory(screenshotsDir);
             }
+
+            if (Directory.Exists(downloadDir) == false)
+            {
+                Directory.CreateDirectory(downloadDir);
+            }           
+
 
             AvaloniaXamlLoader.Load(this);
         }
