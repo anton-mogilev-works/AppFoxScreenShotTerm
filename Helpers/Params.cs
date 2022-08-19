@@ -15,7 +15,7 @@ namespace AppFoxScreenShotTerm.Helpers
         public const string DOWNLOAD_FOLDER = "downloaded_screenshots";
         public static string? applicationPath = Path.GetDirectoryName(System.Reflection.Assembly.GetExecutingAssembly().Location);
         public static string DOWNLOAD_ADDRESS = "http://45.84.226.180/GetScreenshots";
-        public static string UPLOAD_ADDRESS = "http://45.84.226.180//UploadScreenshot";
+        public static string UPLOAD_ADDRESS = "http://45.84.226.180/UploadScreenshot";
 
 
     }

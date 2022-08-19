@@ -9,6 +9,9 @@ using System.Collections.Generic;
 using System.IO;
 using AppFoxScreenShotTerm.Helpers;
 using System.Collections.ObjectModel;
+using System.Drawing.Imaging;
+using System.Drawing;
+
 
 namespace AppFoxScreenShotTerm.ViewModels
 {
@@ -59,8 +62,9 @@ namespace AppFoxScreenShotTerm.ViewModels
 
         public async Task GetScreenShots()
         {
+            FilesGrid = new();
             var streamTask = client.GetStreamAsync(
-                "http://45.84.226.180/GetScreenshots?startDate=2022.08.16&endDate=2022.08.18"
+                Params.DOWNLOAD_ADDRESS + "?startDate=" + dateFrom.ToString("yyyy.MM.dd") + "&endDate=" + dateTo.ToString("yyyy.MM.dd")
             );
             var repositories = await JsonSerializer.DeserializeAsync<List<CDNRecord>>(
                 await streamTask
@@ -107,16 +111,7 @@ namespace AppFoxScreenShotTerm.ViewModels
 
             }
 
-
-        }
-
-        public string text = "/mnt/data/projects/AppFoxScreenShotTerm/bin/Debug/net6.0/downloaded_screenshots/2022_08_16_10_26_17.jpg";
-
-        public string Text
-        {
-            get => text;
-            private set => this.RaiseAndSetIfChanged(ref text, value);
-        }
+        }        
 
     }
 }

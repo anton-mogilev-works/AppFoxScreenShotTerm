@@ -6,6 +6,8 @@ using System.Drawing;
 using System.Text;
 using ReactiveUI;
 using AppFoxScreenShotTerm.Helpers;
+using System.Net.Http;
+using System.Threading.Tasks;
 
 namespace AppFoxScreenShotTerm.ViewModels
 {
@@ -17,6 +19,7 @@ namespace AppFoxScreenShotTerm.ViewModels
         //     get => messageText;
         //     set => this.RaiseAndSetIfChanged(ref messageText, value);
         // }
+        
 
         public ViewModelBase mainPanelViewModel = new ViewModelBase();
 
@@ -28,37 +31,20 @@ namespace AppFoxScreenShotTerm.ViewModels
 
         public MainWindowViewModel() 
         {
-            MainPanelViewModel = new UploadScreenShotsViewModel();            
-        }
-        
-        // public string imageSource = Params.SCREENS_FOLDER + Path.DirectorySeparatorChar + "2022_08_18_11_45_09.jpg";
+            var mpvm = new UploadScreenShotsViewModel();            
 
-        // public ViewModelBase downloadScreenshotsModel;
+            MainPanelViewModel = mpvm;
+        }
         
         public void DownloadScreenshots()
         {
             MainPanelViewModel = new DownloadScreenShotsViewModel();
         }
 
-
-
-        private void ShowScreenshotsList()
+        public async Task MakeScreenshot()
         {
-            List<string> screenShots = ScreenShotsHandler.GetScreenshotsList();
-
-            if (screenShots.Count > 0)
-            {
-                foreach (string screenShot in screenShots)
-                {                   
-                    // MessageText += screenShot + "\r\n";
-                }
-            }
-
-        }
-
-        public void MakeScreenshot()
-        {
-            string imagePath = Params.SCREENS_FOLDER + Path.DirectorySeparatorChar + DateTime.Now.ToString("yyyy_MM_dd_hh_mm_ss") + ".jpg";            
+            string fileName = DateTime.Now.ToString("yyyy_MM_dd_hh_mm_ss") + ".jpg";
+            string imagePath = Params.SCREENS_FOLDER + Path.DirectorySeparatorChar + fileName;            
 
             var captureBmp = new Bitmap(Params.screenWidth, Params.screenHeight, PixelFormat.Format32bppArgb);
             using var captureGraphic = Graphics.FromImage(captureBmp);
@@ -72,8 +58,39 @@ namespace AppFoxScreenShotTerm.ViewModels
             {
                 Console.WriteLine(e.ToString());
             }
-
             
+            if(File.Exists(imagePath))
+            {                  
+                HttpContent bytesContent = new ByteArrayContent(File.ReadAllBytes(imagePath));
+                using (var client = new HttpClient())
+                using (var formData = new MultipartFormDataContent())
+                {
+                    
+                    formData.Add(bytesContent, "file", fileName);                   
+                    var streamTask = await client.PostAsync(Params.UPLOAD_ADDRESS, formData);
+                    await streamTask.Content.ReadAsStringAsync();
+
+                    if (streamTask.IsSuccessStatusCode)
+                    {
+                        MainPanelViewModel = new UploadScreenShotsViewModel("Screenshot posted");
+                    }
+                    else
+                    {
+                        MainPanelViewModel = new UploadScreenShotsViewModel("Error: " + streamTask.StatusCode + "\r\n" + Params.UPLOAD_ADDRESS);
+                    }
+
+                    
+
+                    //return streamTask;
+
+                    //var response = await client.PostAsync(actionUrl, formData);
+                    //if (!response.IsSuccessStatusCode)
+                    //{
+                    //    return null;
+                    //}
+                    //return await response.Content.ReadAsStreamAsync();
+                }
+            }
 
         }
         
